@@ -1,0 +1,7 @@
+AgeBand,passengers,median_fare
+Child 0-12,29,20.21
+Teen 13-18,29,13.0
+Young 19-30,219,8.66
+Adult 31-45,87,22.52
+Mature 46-60,43,51.48
+Senior 60+,11,75.25

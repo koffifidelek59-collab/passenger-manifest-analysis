@@ -1,0 +1,300 @@
+{
+  "rows": 418,
+  "cols_raw": 12,
+  "missing": {
+    "Age": 86,
+    "Fare": 1,
+    "Cabin": 327
+  },
+  "dup_rows": 0,
+  "dup_ids": 0,
+  "survived_equals_female": 100.0,
+  "crosstab": {
+    "0": {
+      "female": 0,
+      "male": 266
+    },
+    "1": {
+      "female": 152,
+      "male": 0
+    }
+  },
+  "titles": {
+    "Mr": 240,
+    "Miss": 79,
+    "Mrs": 72,
+    "Master": 21,
+    "Officer": 5,
+    "Royalty": 1
+  },
+  "age_imputed": 86,
+  "age_imputed_pct": 20.6,
+  "fare_imputed": 1,
+  "fare_zero": 2,
+  "cabin_missing": 327,
+  "cabin_missing_pct": 78.2,
+  "cabin_by_class": {
+    "1": 74.8,
+    "2": 7.5,
+    "3": 1.8
+  },
+  "cols_clean": 24,
+  "kpi": {
+    "passengers": 418,
+    "female_pct": 36.4,
+    "median_age": 26.0,
+    "median_fare": 14.45,
+    "third_class_pct": 52.2,
+    "alone_pct": 60.5,
+    "avg_family": 1.84,
+    "children": 27,
+    "cabin_known_pct": 21.8
+  },
+  "fare_ratio_1_3": 7.6,
+  "fare_max": 512.33,
+  "fare_p99": 262.38,
+  "group_travel_pct": 23.2,
+  "tables": {
+    "class": [
+      {
+        "Pclass_label": "1 First",
+        "passengers": 107,
+        "median_fare": 60.0,
+        "median_age": 42.0,
+        "female_pct": 46.73,
+        "cabin_pct": 74.77
+      },
+      {
+        "Pclass_label": "2 Second",
+        "passengers": 93,
+        "median_fare": 15.75,
+        "median_age": 28.0,
+        "female_pct": 32.26,
+        "cabin_pct": 7.53
+      },
+      {
+        "Pclass_label": "3 Third",
+        "passengers": 218,
+        "median_fare": 7.9,
+        "median_age": 25.0,
+        "female_pct": 33.03,
+        "cabin_pct": 1.83
+      }
+    ],
+    "embarked": [
+      {
+        "Embarked": "C",
+        "passengers": 102,
+        "median_fare": 27.72,
+        "third_pct": 34.31
+      },
+      {
+        "Embarked": "Q",
+        "passengers": 46,
+        "median_fare": 7.75,
+        "third_pct": 89.13
+      },
+      {
+        "Embarked": "S",
+        "passengers": 270,
+        "median_fare": 13.78,
+        "third_pct": 52.59
+      }
+    ],
+    "age_band": [
+      {
+        "AgeBand": "Child 0-12",
+        "passengers": 29,
+        "median_fare": 20.21
+      },
+      {
+        "AgeBand": "Teen 13-18",
+        "passengers": 29,
+        "median_fare": 13.0
+      },
+      {
+        "AgeBand": "Young 19-30",
+        "passengers": 219,
+        "median_fare": 8.66
+      },
+      {
+        "AgeBand": "Adult 31-45",
+        "passengers": 87,
+        "median_fare": 22.52
+      },
+      {
+        "AgeBand": "Mature 46-60",
+        "passengers": 43,
+        "median_fare": 51.48
+      },
+      {
+        "AgeBand": "Senior 60+",
+        "passengers": 11,
+        "median_fare": 75.25
+      }
+    ],
+    "title": [
+      {
+        "Title": "Mr",
+        "passengers": 240,
+        "median_age": 26.0
+      },
+      {
+        "Title": "Miss",
+        "passengers": 79,
+        "median_age": 22.0
+      },
+      {
+        "Title": "Mrs",
+        "passengers": 72,
+        "median_age": 35.5
+      },
+      {
+        "Title": "Master",
+        "passengers": 21,
+        "median_age": 7.0
+      },
+      {
+        "Title": "Officer",
+        "passengers": 5,
+        "median_age": 47.0
+      },
+      {
+        "Title": "Royalty",
+        "passengers": 1,
+        "median_age": 39.0
+      }
+    ],
+    "family": [
+      {
+        "FamilySize": 1,
+        "passengers": 253,
+        "median_fare": 8.05
+      },
+      {
+        "FamilySize": 2,
+        "passengers": 74,
+        "median_fare": 26.0
+      },
+      {
+        "FamilySize": 3,
+        "passengers": 57,
+        "median_fare": 23.0
+      },
+      {
+        "FamilySize": 4,
+        "passengers": 14,
+        "median_fare": 33.38
+      },
+      {
+        "FamilySize": 5,
+        "passengers": 7,
+        "median_fare": 34.38
+      },
+      {
+        "FamilySize": 6,
+        "passengers": 3,
+        "median_fare": 263.0
+      },
+      {
+        "FamilySize": 7,
+        "passengers": 4,
+        "median_fare": 31.39
+      },
+      {
+        "FamilySize": 8,
+        "passengers": 2,
+        "median_fare": 46.9
+      },
+      {
+        "FamilySize": 11,
+        "passengers": 4,
+        "median_fare": 69.55
+      }
+    ]
+  },
+  "corr": {
+    "labels": [
+      "Age",
+      "Fare",
+      "FamilySize",
+      "SibSp",
+      "Parch",
+      "Pclass"
+    ],
+    "matrix": [
+      [
+        1.0,
+        0.34,
+        -0.09,
+        -0.09,
+        -0.05,
+        -0.53
+      ],
+      [
+        0.34,
+        1.0,
+        0.25,
+        0.17,
+        0.23,
+        -0.58
+      ],
+      [
+        -0.09,
+        0.25,
+        1.0,
+        0.79,
+        0.83,
+        0.01
+      ],
+      [
+        -0.09,
+        0.17,
+        0.79,
+        1.0,
+        0.31,
+        0.0
+      ],
+      [
+        -0.05,
+        0.23,
+        0.83,
+        0.31,
+        1.0,
+        0.02
+      ],
+      [
+        -0.53,
+        -0.58,
+        0.01,
+        0.0,
+        0.02,
+        1.0
+      ]
+    ]
+  },
+  "corr_age_fare": 0.34,
+  "corr_class_fare": -0.58,
+  "corr_fam_fare": 0.25,
+  "dq": {
+    "completeness": 91.7,
+    "uniqueness": 100.0,
+    "validity": 100.0,
+    "consistency": 0.0,
+    "score": 73.0,
+    "missing_rate": 8.3
+  },
+  "fare_by_class": {
+    "1": 60.0,
+    "2": 15.75,
+    "3": 7.9
+  },
+  "fare_by_port": {
+    "C": 27.72,
+    "Q": 7.75,
+    "S": 13.78
+  },
+  "fare_alone": 8.05,
+  "fare_group": 26.0,
+  "outliers_fare": 55
+}
