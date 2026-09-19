@@ -1,221 +1,214 @@
-Voici une version beaucoup plus professionnelle, moderne et GitHub premium, entièrement en anglais, avec un ton orienté portfolio, data analytics et recrutement.
+# 🚢 Passenger Manifest — Data Analysis & Interactive Dashboard
 
-🚢 Passenger Manifest Analytics
-Advanced Data Exploration, Quality Assessment & Interactive Executive Dashboard
+<p align="center">
 
-https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white https://img.shields.io/badge/Pandas-Data%20Analysis-150458?style=for-the-badge&logo=pandas&logoColor=white https://img.shields.io/badge/NumPy-Scientific%20Computing-013243?style=for-the-badge&logo=numpy&logoColor=white https://img.shields.io/badge/Plotly-Interactive%20Dashboard-3F4F75?style=for-the-badge&logo=plotly&logoColor=white https://img.shields.io/badge/Matplotlib-Visualization-11557C?style=for-the-badge&logo=python&logoColor=white
+**A rigorous Python-based data analysis of 418 passenger records, with an interactive executive dashboard**
 
-A complete end-to-end data analytics project combining data quality assessment, statistical exploration, interactive visualization, and executive reporting.
+<br>
 
-👨‍💻 About the Author
-KOUAME Koffi Fidèle
+[![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python\&logoColor=white)](#)
+[![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-150458?logo=pandas\&logoColor=white)](#)
+[![NumPy](https://img.shields.io/badge/NumPy-Computation-013243?logo=numpy\&logoColor=white)](#)
+[![Plotly](https://img.shields.io/badge/Plotly-Interactive%20Visualization-3F4F75?logo=plotly\&logoColor=white)](#)
+[![Matplotlib](https://img.shields.io/badge/Matplotlib-Visualization-11557C?logo=matplotlib\&logoColor=white)](#)
 
-Energy Systems Engineer | Data Analyst | Python Developer
+</p>
 
-📧 Email:
- koffifidelek59@gmail.com
+---
 
-💼 LinkedIn:
- https://www.linkedin.com/in/koffi-fidele-kouame/
+## 👤 Author
 
-💻 GitHub:
- https://github.com/koffifidelek59-collab
+**KOUAME Koffi Fidèle**
+*Energy Systems Engineer · Data Analyst*
 
-📖 Project Overview
+📧 **Email:** [koffifidelek59@gmail.com](mailto:koffifidelek59@gmail.com)
+💼 **LinkedIn:** [Koffi Fidèle Kouamé](https://www.linkedin.com/in/koffi-fidele-kouame/)
+💻 **GitHub:** [koffifidelek59-collab](https://github.com/koffifidelek59-collab)
 
-This project delivers a comprehensive analytical workflow applied to a passenger manifest dataset containing 418 passenger records and 24 attributes.
+---
 
-From raw-data auditing to dashboard deployment, every stage of the project was developed using a fully reproducible Python ecosystem.
+## 📌 Project Overview
 
-The analysis follows professional data analytics practices including:
+This project presents a complete **data cleaning, exploratory analysis, visualization and dashboard development workflow** based on a passenger manifest containing **418 records and 24 variables**.
 
-Data auditing
-Data quality assessment
-Missing-value treatment
-Feature validation
-Exploratory Data Analysis (EDA)
-Statistical interpretation
-Interactive dashboard development
-Executive insight generation
+The project was developed entirely in **Python**, from raw-data inspection and cleaning to statistical analysis and interactive visualization.
 
-The final output is a fully standalone HTML dashboard that runs directly in any web browser without requiring:
+The final deliverable is a **self-contained HTML dashboard** that can be opened directly in any modern web browser without requiring a server, Python environment or additional installation.
 
-Python
-Flask
-Streamlit
-Database connections
-Cloud services
-External APIs
-🎯 Project Objectives
+> **Dashboard language:** French 🇫🇷
+> **Analysis & documentation:** English 🇬🇧
 
-The project was designed to address the following goals:
+---
 
-✅ Assess dataset quality and reliability
+## 🎯 Objectives
 
-✅ Identify missing and inconsistent information
+The analysis was designed to:
 
-✅ Develop a transparent data-cleaning pipeline
+* 🔎 Audit the quality and structure of the original dataset
+* 🧹 Clean and prepare the passenger manifest
+* 📊 Explore passenger characteristics and distributions
+* 📈 Produce statistically meaningful visualizations
+* 🧠 Identify important patterns and data-quality issues
+* ⚠️ Detect potential target leakage
+* 📋 Translate analytical results into actionable insights
+* 🖥️ Build an interactive executive-style dashboard
+* ♻️ Provide a fully reproducible Python workflow
 
-✅ Explore passenger demographics and ticket information
+---
 
-✅ Produce meaningful visual analytics
+# 🚨 Key Analytical Finding
 
-✅ Detect structural issues and analytical risks
+## `Survived` is an exact copy of `Sex`
 
-✅ Generate actionable business insights
+The most important discovery in the dataset is a **perfect deterministic relationship between `Survived` and `Sex`**.
 
-✅ Create an executive-level interactive dashboard
+In other words:
 
-✅ Ensure full reproducibility and transparency
+> **Every observation has the same information encoded twice.**
 
-🔍 Executive Finding
-Survived = Sex (Perfect Information Duplication)
+The contingency table contains only two populated cells, while the other two possible combinations are empty.
 
-The most significant discovery made during the analysis is the existence of a perfect deterministic relationship between the variables:
+This constitutes **target leakage**.
 
-Survived ↔ Sex
+### Why does this matter?
 
+A model trained on `Sex` to predict `Survived` could achieve an apparently perfect performance.
 
-Every observation encodes exactly the same information in both variables.
+However, such a result would not represent meaningful predictive power. The target variable is effectively reproducing the predictor.
 
-The contingency table reveals that only two possible combinations exist, while the remaining combinations never occur.
+Therefore, the project deliberately **does not report survival rates by segment as substantive findings**, because these would simply reproduce the underlying sex distribution rather than reveal an independent survival pattern.
 
-This indicates a classical case of:
+### Analytical principle
 
-⚠️ Target Leakage
+> **A perfect model is not necessarily a valid model.**
 
-A machine-learning model predicting Survived from Sex would appear to achieve:
+Detecting and documenting the data defect is more valuable than producing an artificially impressive predictive score.
 
-100% Accuracy
+---
 
+# 🧹 Data Cleaning & Preparation
 
-However, this performance would be entirely misleading because the target variable is simply reproducing information already contained in the predictor.
+The cleaning process was designed to preserve the original observations while handling missing and inconsistent values transparently.
 
-Why This Matters
+### Cleaning decisions
 
-One of the most important responsibilities of a data analyst is not building impressive models.
+| Variable   | Missing values | Treatment                                  | Rationale                                                 |
+| :--------- | -------------: | :----------------------------------------- | :-------------------------------------------------------- |
+| `Age`      |     86 · 20.6% | Median imputation by `Title` × `Pclass`    | Captures both life stage and passenger class              |
+| `Fare`     |              1 | Median imputation by `Pclass` × `Embarked` | Fare depends strongly on class and route                  |
+| `Cabin`    |    327 · 78.2% | **Not imputed**                            | Missingness itself contains useful structural information |
+| Zero fares |              2 | **Retained**                               | Treated as legitimate commercial/company arrangements     |
 
-It is ensuring that conclusions remain statistically valid.
+### Preservation principle
 
-A perfect prediction achieved through duplicated information provides no genuine predictive value.
+**No passenger record was deleted.**
 
-Therefore, this project prioritizes data integrity and analytical transparency over artificially high performance metrics.
+Every imputed value is explicitly flagged through:
 
-A perfect model is not necessarily a useful model.
+* `Age_imputed`
+* `Fare_imputed`
 
-🧹 Data Cleaning Strategy
+This makes the transformation process auditable and reproducible.
 
-The cleaning process was carefully designed to preserve information while ensuring consistency and analytical reliability.
+---
 
-Missing-Value Treatment
-Variable	Missing Rate	MethodAge	20.6%	Median by Title × Passenger Class
-Fare	0.2%	Median by Passenger Class × Port
-Cabin	78.2%	Preserved as Missing
-Zero Fare	2 Records	Retained
-Data Governance Principles
+## 🏗️ Dataset Transformation
 
-✔ No passenger records removed
+The original dataset is transformed without deleting observations.
 
-✔ No arbitrary value replacement
+| Stage            | Records |       Variables |
+| :--------------- | ------: | --------------: |
+| Original dataset |     418 | Original schema |
+| Cleaned dataset  | **418** |          **24** |
 
-✔ Fully traceable transformations
+The final cleaned dataset is available at:
 
-✔ Reproducible methodology
-
-✔ Transparent documentation
-
-Additional audit flags were introduced:
-
-Age_imputed
-Fare_imputed
-
-
-allowing every generated value to be explicitly tracked.
-
-🏗 Dataset Evolution
-Dataset Version	Records	VariablesRaw Dataset	418	Original Schema
-Cleaned Dataset	418	24
-
-No observations were deleted during processing.
-
-Cleaned dataset:
-
+```text
 data/manifest_clean.csv
+```
 
-📊 Interactive Executive Dashboard
+---
 
-A fully interactive web dashboard was developed to transform analytical findings into an intuitive decision-support interface.
+# 📊 Interactive Dashboard
 
+The project includes a browser-based interactive dashboard:
+
+```text
 dashboard.html
+```
 
-Dashboard Features
-Interactive Analytics
-KPI Cards
-Passenger Distribution Analysis
-Passenger Class Breakdown
-Gender Distribution
-Port Analysis
-Fare Distribution
-Age Distribution
-Missing-Value Diagnostics
-Global Filters
-Passenger Class
-Sex
-Embarkation Port
-Visualization Engine
-Plotly Interactive Charts
-Dynamic KPI Updates
-Executive Dark Theme
-Cross-Filtering Logic
-Instant Data Refresh
-Self-Contained Architecture
+### Dashboard characteristics
 
-The dashboard operates entirely within the browser.
+* **8 analytical panels**
+* **3 global filters**
+* Passenger-class filtering
+* Sex filtering
+* Port filtering
+* Synchronized KPI updates
+* Interactive Plotly visualizations
+* Executive-style dark theme
+* No external server required
 
-To eliminate dependency on backend technologies, the dashboard generation process:
+### Cross-filtering architecture
 
-Precomputes analytical states in Python
-Embeds processed data directly into HTML
-Uses JavaScript filtering logic
-Updates visualizations through Plotly React rendering
+A standard browser cannot directly execute pandas operations.
 
-As a result, users can interact with the dashboard without:
+To preserve interactivity while keeping the dashboard completely self-contained, the Python dashboard generator:
 
-❌ Flask
-❌ Streamlit
-❌ SQL Database
-❌ Cloud Services
-❌ Python Runtime
-❌ API Calls
+1. Computes the relevant filter combinations in advance
+2. Stores the resulting analytical states inside the HTML
+3. Uses JavaScript to retrieve the appropriate state
+4. Updates the visualizations through `Plotly.react`
 
-📈 Analytical Deliverables
+This provides instantaneous filtering without requiring:
 
-The project generates:
+* a Python backend
+* Flask
+* Streamlit
+* a database
+* an external API
+* a running server
 
-Data Quality Assessment
-Missing-Value Analysis
-Passenger Demographic Study
-Age Analysis
-Fare Analysis
-Class Distribution Analysis
-Port Distribution Analysis
-Data Integrity Diagnostics
-Executive Recommendations
-Interactive Dashboard
+For analytical stability, combinations involving fewer than **five passengers** are suppressed rather than presented as statistically meaningful rates.
 
-Key findings are documented in:
+---
 
+# 📈 Analytical Outputs
+
+The project produces:
+
+* Passenger distribution analysis
+* Class-level analysis
+* Sex distribution
+* Port analysis
+* Missing-value assessment
+* Fare analysis
+* Age analysis
+* Data-quality diagnostics
+* Five key analytical insights
+* Executive recommendations
+
+The principal conclusions are documented separately in:
+
+```text
 INSIGHTS.md
+```
 
-🗂 Repository Structure
+---
+
+# 🗂️ Project Structure
+
+```text
 passenger-manifest-analysis/
 │
 ├── assets/
+│
 ├── data/
 │   ├── File_3_original.csv
 │   └── manifest_clean.csv
 │
 ├── figures/
+│
 ├── results/
 │
 ├── vendor/
@@ -230,187 +223,254 @@ passenger-manifest-analysis/
 ├── report.tex
 ├── README.md
 └── .gitignore
+```
 
-📦 Project Deliverables
-Deliverable	StatusJupyter Notebook Analysis	✅
-Python Analysis Pipeline	✅
-Dashboard Generator	✅
-Cleaned Dataset	✅
-Interactive Dashboard	✅
-Insight Documentation	✅
-Technical Report (PDF)	✅
-LaTeX Source Files	✅
-⚙️ Technology Stack
-Data Analytics
-Python
-Pandas
-NumPy
-Visualization
-Matplotlib
-Plotly
-Dashboard Layer
-HTML
-CSS
-JavaScript
-Reporting
-LaTeX
-Tools Intentionally Excluded
+---
 
-To demonstrate a fully programmable analytical workflow, the project was completed without using:
+# 📦 Deliverables
 
-❌ Excel
-❌ Power BI
-❌ Tableau
-❌ Low-Code Platforms
+| Requirement                 | Status | Deliverable                         |
+| :-------------------------- | :----: | :---------------------------------- |
+| Python analysis             |    ✅   | `Passenger_Manifest_Analysis.ipynb` |
+| Reusable analysis script    |    ✅   | `analysis.py`                       |
+| Dashboard generation script |    ✅   | `dashboard.py`                      |
+| Cleaned dataset             |    ✅   | `data/manifest_clean.csv`           |
+| Interactive dashboard       |    ✅   | `dashboard.html`                    |
+| Key insights                |    ✅   | `INSIGHTS.md`                       |
+| Technical report            |    ✅   | `report.pdf`                        |
+| LaTeX source                |    ✅   | `report.tex`                        |
 
-Everything was produced through code.
+---
 
-🚀 Quick Start
-Clone the Repository
+# 🛠️ Technology Stack
+
+The project was developed using a **Python-only analytical workflow**.
+
+| Technology     | Purpose                          |
+| :------------- | :------------------------------- |
+| **Python**     | Core programming language        |
+| **Pandas**     | Data cleaning and manipulation   |
+| **NumPy**      | Numerical computation            |
+| **Matplotlib** | Static visualization             |
+| **Plotly**     | Interactive visualization        |
+| **JavaScript** | Browser-side dashboard filtering |
+| **LaTeX**      | Technical report production      |
+
+### Deliberately excluded
+
+No use was made of:
+
+* ❌ Microsoft Excel
+* ❌ Power BI
+* ❌ Tableau
+
+The complete analytical workflow remains reproducible from Python.
+
+---
+
+# 🚀 Quick Start
+
+## 1. Clone the repository
+
+```bash
 git clone https://github.com/koffifidelek59-collab/passenger-manifest-analysis.git
-
 cd passenger-manifest-analysis
+```
 
-Install Dependencies
+## 2. Install dependencies
+
+```bash
 pip install pandas numpy matplotlib plotly
+```
 
-Run the Analysis
+## 3. Run the analysis
+
+```bash
 python analysis.py
+```
 
-Build the Dashboard
+This performs the main cleaning, KPI computation and figure generation.
+
+## 4. Generate the dashboard
+
+```bash
 python dashboard.py
+```
 
-Launch the Dashboard
+The resulting dashboard is:
 
-Open:
-
+```text
 dashboard.html
+```
 
+## 5. Open the dashboard
+
+Simply open:
+
+```text
+dashboard.html
+```
 
 in any modern browser.
 
-No installation, backend server, or environment configuration is required.
+**No server is required.**
 
-🔬 Analytical Workflow
+---
+
+# 📓 Reproduce the Notebook Analysis
+
+The complete analytical workflow is also available in:
+
+```text
+Passenger_Manifest_Analysis.ipynb
+```
+
+The notebook can be opened with:
+
+* Jupyter Notebook
+* JupyterLab
+* Google Colab
+* VS Code
+
+Run the cells sequentially to reproduce the analysis.
+
+---
+
+# 🔬 Analytical Methodology
+
+The project follows a structured data-analysis pipeline:
+
+```text
 Raw Dataset
-      │
-      ▼
+     │
+     ▼
 Data Audit
-      │
-      ▼
-Missing-Value Assessment
-      │
-      ▼
+     │
+     ▼
+Missing-Value Analysis
+     │
+     ▼
 Data Cleaning
-      │
-      ▼
+     │
+     ▼
 Feature Validation
-      │
-      ▼
+     │
+     ▼
 Exploratory Data Analysis
-      │
-      ▼
-Data Quality Diagnostics
-      │
-      ▼
+     │
+     ▼
+Data-Quality Diagnostics
+     │
+     ▼
 Visualization
-      │
-      ▼
+     │
+     ▼
 Insight Extraction
-      │
-      ▼
+     │
+     ▼
 Interactive Dashboard
+```
 
-✅ Data Integrity First
+This workflow emphasizes **data validity before visualization or modeling**.
 
-Many analytical projects jump directly into predictive modeling.
+---
 
-This project deliberately adopts a different philosophy:
+# ⚠️ Data Quality & Analytical Integrity
 
-Validate before you model.
+A central principle of this project is:
 
-The discovery of the perfect duplication between Survived and Sex demonstrates how easily misleading conclusions can emerge when data-quality validation is ignored.
+> **Do not allow a visually convincing result to hide a structurally invalid dataset.**
 
-The objective of analytics is not merely prediction.
+The discovery of the `Survived`–`Sex` duplication demonstrates why data validation must precede predictive modeling.
 
-The objective is trustworthy decision-making.
+Rather than optimizing for an impressive metric, the analysis documents the limitation and adjusts the interpretation accordingly.
 
-📑 Technical Documentation
+This approach prioritizes:
 
-The project includes a complete technical report available in both:
+**Data quality → Valid analysis → Reliable interpretation → Actionable insight**
 
+---
+
+# 📋 Key Insights
+
+Five principal insights and corresponding recommendations are documented in:
+
+```text
+INSIGHTS.md
+```
+
+The insights are derived from the cleaned dataset and the analytical workflow rather than from unsupported assumptions.
+
+---
+
+# 📄 Technical Report
+
+A complete technical report is provided in both PDF and LaTeX formats:
+
+```text
 report.pdf
 report.tex
+```
 
+The report documents:
 
-The report covers:
+* Dataset preparation
+* Cleaning methodology
+* Analytical decisions
+* Visualizations
+* Findings
+* Data-quality limitations
+* Recommendations
 
-Dataset Structure
-Cleaning Methodology
-Imputation Strategy
-Statistical Analysis
-Visualizations
-Dashboard Architecture
-Key Findings
-Limitations
-Recommendations
-🔄 Reproducibility & Transparency
+---
 
-The entire repository is structured around modern analytics best practices:
+# 🔐 Reproducibility
 
-Raw Data
-     ↓
-Cleaning
-     ↓
-Analysis
-     ↓
-Visualization
-     ↓
-Dashboard
+The project is structured so that another analyst can reproduce the principal outputs from the repository.
 
+The workflow separates:
 
-This separation ensures:
+**Raw data → Cleaning → Analysis → Visualization → Dashboard**
 
-Reproducibility
-Maintainability
-Auditability
-Scalability
-Transparency
-🌍 Professional Relevance
+This separation improves:
 
-This project showcases competencies across multiple disciplines:
+* reproducibility
+* auditability
+* maintainability
+* transparency
+* future extension
 
-Data Engineering
+---
 
-Data quality control, cleaning, validation, and transformation.
+# 🌍 Professional Profile
 
-Data Analytics
+This project reflects an analytical workflow combining:
 
-Statistical exploration, KPI development, and insight generation.
+**Data Engineering**
+→ data quality, cleaning and transformation
 
-Data Visualization
+**Data Analytics**
+→ exploratory analysis, KPIs and statistical interpretation
 
-Professional communication through static and interactive visualizations.
+**Data Visualization**
+→ static and interactive visual communication
 
-Decision Support
+**Decision Support**
+→ translating analytical findings into recommendations
 
-Converting analytical findings into actionable recommendations.
+The same methodology can be transferred to domains such as **energy systems, renewable energy, green hydrogen and engineering analytics**.
 
-The methodology presented here can be applied to sectors including:
+---
 
-Energy Systems
-Renewable Energy
-Green Hydrogen
-Utilities
-Industrial Analytics
-Asset Management
-Engineering Operations
-⭐ Project Philosophy
+## ⭐ Project Philosophy
 
-Clean the data. Challenge the assumptions. Validate the evidence. Communicate the insight.
+> **Clean the data. Question the structure. Validate the evidence. Then communicate the insight.**
 
-KOUAME Koffi Fidèle
+---
 
-Energy Systems Engineer • Data Analyst • Python Developer
+<p align="center">
 
-"Transforming data into trustworthy decisions."
+**KOUAME Koffi Fidèle**
+*Energy Systems Engineer · Data Analyst*
+
+</p>
