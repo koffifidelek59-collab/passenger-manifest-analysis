@@ -1,18 +1,39 @@
-# Manifeste passagers : analyse de données et tableau de bord
+# Passenger Manifest: Data Analysis and Dashboard
 
-**KOUAME Koffi Fidele** · Stage d'analyse de données · koffifidelek59@gmail.com
+**KOUAME Koffi Fidèle**
+Energy Systems Engineer | Data Analyst
+koffifidelek59@gmail.com
+LinkedIn: https://www.linkedin.com/in/koffi-fidele-kouame/
+GitHub: https://github.com/koffifidelek59-collab
 
-418 enregistrements · **Python uniquement**
+418 passenger records · **Python only**
 
-> Le tableau de bord interactif (`dashboard.html`) est **entièrement en français**.
+> The interactive dashboard (`dashboard.html`) is entirely in French.
 
 ---
 
-# Passenger Manifest: Data Analysis and Dashboard
+## Project Structure
 
-**KOUAME Koffi Fidele** · Data Analysis Internship · koffifidelek59@gmail.com
-
-418 passenger records · **Python only**
+passenger-manifest-analysis/
+│
+├── assets/
+├── data/
+│   ├── File_3_original.csv
+│   └── manifest_clean.csv
+├── figures/
+├── results/
+├── vendor/
+│   └── plotly.min.js
+│
+├── Passenger_Manifest_Analysis.ipynb
+├── analysis.py
+├── dashboard.py
+├── dashboard.html
+├── INSIGHTS.md
+├── report.pdf
+├── report.tex
+├── README.md
+└── .gitignore
 
 ---
 
@@ -25,30 +46,29 @@
 | Interactive dashboard | 8 panels, 3 cross-filters, opens in any browser | `dashboard.html` |
 | Key insights | Five insights with recommendations | `INSIGHTS.md` |
 
-**Tools.** pandas, NumPy, Matplotlib, Plotly. No Excel, no Power BI, no Tableau at
-any stage, as the brief requires.
+**Tools.** pandas, NumPy, Matplotlib, Plotly. No Excel, no Power BI, no Tableau at any stage, as the brief requires.
 
-## Start here
+---
 
-Double-click `dashboard.html`. Self-contained: no server, no Python, no install.
-Three filters, class, sex and port, update **every KPI and every chart at once**.
+## Start Here
 
-For the analysis, open `Passenger_Manifest_Analysis.ipynb` with the Colab badge at
-the top and run every cell.
+Double-click `dashboard.html`. Self-contained: no server, no Python, no install. Three filters, class, sex and port, update every KPI and every chart at once.
 
-## The finding that shapes the whole study
+For the analysis, open `Passenger_Manifest_Analysis.ipynb` with the Colab badge at the top and run every cell.
 
-**`Survived` is an exact copy of `Sex`.** 100% of rows. Two of the four cells of the
-contingency table are empty.
+---
 
-This is target leakage, and it is invisible to a missing-value audit. The consequence
-runs through everything: **no survival rate by any segment is reported**, because
-every such figure would restate the sex split of that segment and nothing more.
+## The Finding That Shapes the Whole Study
 
-Producing a model with a perfect score would have been the easy path. Reporting the
-defect is the correct one.
+**`Survived` is an exact copy of `Sex`.** 100% of rows. Two of the four cells of the contingency table are empty.
 
-## Cleaning decisions
+This is target leakage, and it is invisible to a missing-value audit. The consequence runs through everything: **no survival rate by any segment is reported**, because every such figure would restate the sex split of that segment and nothing more.
+
+Producing a model with a perfect score would have been the easy path. Reporting the defect is the correct one.
+
+---
+
+## Cleaning Decisions
 
 | Column | Missing | Decision | Why |
 | :--- | ---: | :--- | :--- |
@@ -57,18 +77,17 @@ defect is the correct one.
 | `Cabin` | 327, 78.2% | **Not imputed** | Absence is informative: recorded for 74.8% of first class against 1.8% of third |
 | Zero fares | 2 rows | **Kept** | One is the chairman of the line on company business. A commercial arrangement, not an error |
 
-Every imputed value is flagged in `Age_imputed` and `Fare_imputed`. **No row was
-deleted.** 12 columns become 24.
+Every imputed value is flagged in `Age_imputed` and `Fare_imputed`. **No row was deleted.** 12 columns become 24.
 
-## The dashboard
+---
 
-Dark executive theme, one hue plus a single accent. Colour that encodes nothing is
-decoration, and decoration on an analytical page costs credibility.
+## The Dashboard
 
-**Cross-filtering.** A browser cannot run pandas, so the script precomputes all 41
-reachable filter states and embeds them; the JavaScript looks up a key and calls
-`Plotly.react`, which is instant. Combinations below five passengers are suppressed,
-because a rate on four people is not a finding.
+Dark executive theme, one hue plus a single accent. Colour that encodes nothing is decoration, and decoration on an analytical page costs credibility.
+
+**Cross-filtering.** A browser cannot run pandas, so the script precomputes all 41 reachable filter states and embeds them; the JavaScript looks up a key and calls `Plotly.react`, which is instant. Combinations below five passengers are suppressed, because a rate on four people is not a finding.
+
+---
 
 ## Reproducing
 
@@ -76,7 +95,3 @@ because a rate on four people is not a finding.
 pip install pandas numpy matplotlib plotly
 python analysis.py     # cleaning, KPIs, five figures
 python dashboard.py    # builds dashboard.html
-```
-
-`analysis.py` must run first: it writes the cleaned table and the findings the
-dashboard reads.
